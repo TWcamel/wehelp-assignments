@@ -4,6 +4,7 @@
 	--first-color: #e0e0e0bb;
 	--second-color: #bcc8dd;
 	--block-gap-size: 18px;
+	--menu-height: 66px;
 }
 
 body {
@@ -14,12 +15,13 @@ body {
 }
 
 #menu {
-	/* overflow: hidden; */
 	background-color: var(--first-color);
 	box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+	top: 0;
 	position: fixed;
 	width: 100%;
 	z-index: 3;
+	height: var(--menu-height);
 }
 
 #menu .menu-btn {
@@ -43,6 +45,7 @@ body {
 	padding: 0;
 	overflow: hidden;
 	list-style: none;
+	background-color: var(--first-color);
 }
 
 #menu-nav a {
@@ -110,6 +113,8 @@ body {
 }
 
 #welcome-home {
+	margin-top: var(--menu-height);
+	/* padding-top: var(--block-gap-size); */
 	height: 300px;
 	position: relative;
 	text-align: center;
