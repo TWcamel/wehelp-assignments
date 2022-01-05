@@ -53,6 +53,9 @@ def maxProduct(nums):
                 max = product
     print(max)
 
+
+maxProduct([5, -20, 2, 6])  # 得到 120
+
 # %%
 # 3
 
@@ -61,18 +64,25 @@ def maxProduct(nums):
 
 
 def maxProduct(nums):
-    max = nums[0]
-    secMax = nums[1]
-    ans = max * secMax
-    length = len(nums)
-    for i in range(2, length):
-        if nums[i] > max:
-            max = nums[i]
-        if max > nums[i] > secMax:
-            secMax = nums[i]
-        if ans < max * secMax:
-            ans = max * secMax
-    print(ans)
+	max = float('-inf')
+	secMax = float('-inf')
+	ans = float('-inf')
+	for i in nums:
+		if i > max:
+			secMax = max
+			max = i
+		elif i > secMax:
+			secMax = i
+	min = float('inf')
+	secMin = float('inf')
+	for i in nums:
+		if i < min:
+			secMin = min
+			min = i
+		elif i < secMin:
+			secMin = i
+	ans =  max * secMax if max * secMax > min * secMin else min * secMin
+	print('ans:', repr(ans).rjust(4), ',nums:' ,repr(nums).rjust(4))
 
 
 # 請用你的程式補完這個函式的區塊
@@ -81,6 +91,11 @@ maxProduct([10, -20, 0, 3])  # 得到 30
 maxProduct([-1, 2])  # 得到 -2
 maxProduct([-1, 0, 2])  # 得到 0
 maxProduct([-1, -2, 0])  # 得到 2
+maxProduct([5, -20, 2, 6])  # 得到 30
+maxProduct([5, 0, -2, -1])  # 得到 2
+maxProduct([-5, 0, -2, -1])  # 得到 10
+maxProduct([-1, 0, 2, -1])  # 得到 1
+maxProduct([-0, -3, -2, -1])  # 得到 6
 
 # %%
 # 4
@@ -101,7 +116,7 @@ result = twoSum([2, 11, 7, 15], 9)
 print(result)  # show [0, 2] because nums[0]+nums[2] is 9
 
 # %%
-# 5 
+# 5
 
 # Time: O(n)
 # Space: O(1)
@@ -118,6 +133,7 @@ def maxZeros(nums):
         else:
             count = 0
     print(max_count)
+
 
 maxZeros([0, 1, 0, 0])  # 得到 2
 maxZeros([1, 0, 0, 0, 0, 1, 0, 1, 0, 0])  # 得到 4
