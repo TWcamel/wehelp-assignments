@@ -13,7 +13,8 @@ calculate(4, 8)  # 你的程式要能夠計算 4+5+6+7+8，最後印出 30
 
 
 def avg(data):
-    print(sum(employee["salary"] for employee in data["employees"])/data["count"])
+    print(sum(employee["salary"]
+          for employee in data["employees"])/data["count"])
 
 
 # 請用你的程式補完這個函式的區塊
@@ -38,6 +39,9 @@ avg({
 # %%
 # 3
 
+# Time: O(n^2)
+# Space: O(1)
+
 
 def maxProduct(nums):
     max = float('-inf')
@@ -49,13 +53,34 @@ def maxProduct(nums):
                 max = product
     print(max)
 
+# %%
+# 3
+
+# Time: O(n)
+# Space: O(1)
+
+
+def maxProduct(nums):
+    max = nums[0]
+    secMax = nums[1]
+    ans = max * secMax
+    length = len(nums)
+    for i in range(2, length):
+        if nums[i] > max:
+            max = nums[i]
+        if max > nums[i] > secMax:
+            secMax = nums[i]
+        if ans < max * secMax:
+            ans = max * secMax
+    print(ans)
+
 
 # 請用你的程式補完這個函式的區塊
 maxProduct([5, 20, 2, 6])  # 得到 120
 maxProduct([10, -20, 0, 3])  # 得到 30
 maxProduct([-1, 2])  # 得到 -2
 maxProduct([-1, 0, 2])  # 得到 0
-maxProduct([-1,-2, 0]) # 得到 2
+maxProduct([-1, -2, 0])  # 得到 2
 
 # %%
 # 4
@@ -76,7 +101,10 @@ result = twoSum([2, 11, 7, 15], 9)
 print(result)  # show [0, 2] because nums[0]+nums[2] is 9
 
 # %%
-# 5
+# 5 
+
+# Time: O(n)
+# Space: O(1)
 
 
 def maxZeros(nums):
@@ -91,8 +119,6 @@ def maxZeros(nums):
             count = 0
     print(max_count)
 
-
-# 請用你的程式補完這個函式的區塊
 maxZeros([0, 1, 0, 0])  # 得到 2
 maxZeros([1, 0, 0, 0, 0, 1, 0, 1, 0, 0])  # 得到 4
 maxZeros([1, 1, 1, 1, 1])  # 得到 0
