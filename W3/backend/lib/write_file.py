@@ -17,34 +17,53 @@ def extrate_data_to_csv(file, data):
             writer.writerow(attraction.values())
     f.close()
 
+
 def extrate_address(address):
-	valid_address = [
-		'中正區',
-		'萬華區',
-		'中山區',
-		'大同區',
-		'大安區',
-		'松山區',
-		'信義區',
-		'士林區',
-		'文山區',
-		'北投區',
-		'內湖區',
-		'南港區'
-		]
-	address = address[5:8]
-	return address if address in valid_address else None
+    valid_address = [
+        '中正區',
+        '萬華區',
+        '中山區',
+        '大同區',
+        '大安區',
+        '松山區',
+        '信義區',
+        '士林區',
+        '文山區',
+        '北投區',
+        '內湖區',
+        '南港區'
+    ]
+    address = address[5:8]
+    return address if address in valid_address else None
+
 
 def extrate_jpg_url(url):
-	return url[0:url.index("https://", 10)]
+    return url[0:url.index("https://", 10)]
+
+def reOrder_data(arr):
+    col_order = [
+        '景點名稱',
+        '區域',
+        '經度',
+        '緯度',
+        '第一張圖檔網址'
+    ]
+
+    data_arr = []
+
+    for data in arr:
+        data_arr.append({k: data[k] for k in col_order if k in data})
+
+    return data_arr
 
 def extrate_data(_data):
     cols = [{'stitle': '景點名稱',
             'address': '區域',
              'longitude': '經度',
-              'latitude': '緯度',
-              'file': '第一張圖檔網址'
+             'latitude': '緯度',
+             'file': '第一張圖檔網址'
              }]
+
 
     extrate_data_arr = []
 
@@ -63,4 +82,4 @@ def extrate_data(_data):
     for data in extrate_data_arr:
         data['第一張圖檔網址'] = extrate_jpg_url(data['第一張圖檔網址'])
 
-    return extrate_data_arr
+    return reOrder_data(extrate_data_arr)
