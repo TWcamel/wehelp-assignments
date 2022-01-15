@@ -2,7 +2,7 @@ from flask import Flask
 from flask import jsonify
 from flask import url_for
 
-app = Flask(__name__, static_url_path='', static_folder='static')
+app = Flask(__name__, static_url_path='', static_folder='../frontend/static')
 
 @app.route('/')
 def app_run():

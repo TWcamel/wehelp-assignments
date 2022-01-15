@@ -28,6 +28,8 @@ let createGalleryItemContainer = (data, { from, to }) => {
 		if (idx >= from && idx < to)
 			createGalleryItems({ container: item, idx: from + idx }, data);
 	});
+
+	console.log("//////////////////////////");
 };
 
 let createGalleryItems = ({ container, idx }, data) => {
