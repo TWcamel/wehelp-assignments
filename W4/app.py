@@ -19,8 +19,9 @@ def index():
 @app.route("/signin", methods=["POST"])
 def signin():
     member_check_code = mb.check_member(user=request.json)["status_code"]
+    # print("123")
     if member_check_code == 1:
-        session['username'] = request.json["_id1"]["username"]
+        session['username'] = request.json["username"]
         return redirect(url_for('app_run'))
     elif member_check_code == 0:
         return redirect(url_for('error_signin', error_message="wrong_account_or_pwd"))
@@ -46,7 +47,8 @@ def error_signin(error_message):
 @app.route("/signout", methods=["GET"])
 def signout():
     session.pop('username', None)
-    return redirect(url_for('index'))
+    return jsonify({"message": "您已經成功登出系統 🚲"})
+    # return redirect(url_for('index'))
 
 
 if __name__ == "__main__":
