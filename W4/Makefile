@@ -1,5 +1,5 @@
 start:
 	docker-compose up -d
-	watchman-make -p '**/*.py' -s 1 --run 'touch uwsgi-reload'
+	watchman-make -p 'server/*.py' -s 1 --run 'touch ./server/uwsgi-reload'
 stop:
 	docker-compose down
