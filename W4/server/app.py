@@ -17,9 +17,10 @@ def index():
 
 @app.route("/signin", methods=["POST"])
 def signin():
-    member_check_code = mb.check_member(user=request.json)["status_code"]
+    form = request.form.to_dict(flat=False)
+    member_check_code=mb.check_member(user = form)["status_code"]
     if member_check_code == 1:
-        session['username'] = request.json["username"]
+        session['username']="username"
         return redirect(url_for('app_run'))
     elif member_check_code == 0:
         return redirect(url_for('error_signin', error_message="wrong_account_or_pwd"))
@@ -27,26 +28,38 @@ def signin():
         return redirect(url_for('error_signin', error_message="empty_input"))
 
 
-@app.route("/member")
+@ app.route("/member")
 def app_run():
     if 'username' in session:
-        return jsonify({"message": "恭喜您，成功登入系統 🙂"})
+        return app.response_class(
+            response = json.dumps({"message": "恭喜您，成功登入系統 🙂"}),
+            status = 200,
+            mimetype = 'application/json'
+        )
     return redirect(url_for('index'))
 
 
-@app.route("/error/<error_message>")
+@ app.route("/error/<error_message>")
 def error_signin(error_message):
     if error_message == "wrong_account_or_pwd":
-        return jsonify({"message": "帳號或密碼錯誤，請重新輸入 😢"})
+        return app.response_class(
+            response = json.dumps({"message": "帳號或密碼錯誤，請重新輸入"}),
+            status = 401,  # Unauthorized (401)
+            mimetype = 'application/json'
+        )
     elif error_message == "empty_input":
-        return jsonify({"message": "請輸入帳號密碼 😥"})
+        return app.response_class(
+            response = json.dumps({"message": "請輸入帳號密碼"}),
+            status = 401,  # Unauthorized (401)
+            mimetype = 'application/json'
+        )
 
 
-@app.route("/signout", methods=["GET"])
+@ app.route("/signout", methods = ["GET"])
 def signout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=int("5000"), host='0.0.0.0')
+    app.run(debug = True, port = int("5000"), host = '0.0.0.0')

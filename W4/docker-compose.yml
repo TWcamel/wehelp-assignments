@@ -5,6 +5,10 @@ services:
         build:
             context: ./server
             dockerfile: dockerfile-flask
+        expose:
+            - ${FLASK_PORT}
+        environment:
+          FLASK_PORT: ${FLASK_PORT}
         volumes:
             - "./server/:/app/server"
             - "./server/client/:/app/client"
@@ -13,7 +17,10 @@ services:
         build:
             context: ./server
             dockerfile: dockerfile-nginx
+        environment:
+          FLASK_PORT: ${FLASK_PORT}
+          NGINX_EXPOSE_PORT: ${NGINX_EXPOSE_PORT}
         ports:
-            - 5000:80
+            - ${FLASK_PORT}:${NGINX_EXPOSE_PORT}
         depends_on:
             - flask
