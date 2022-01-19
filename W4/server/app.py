@@ -22,31 +22,29 @@ def signin():
     if member_check_code == 1:
         session['username'] = "username"
         return redirect(url_for('app_run'))
-    elif member_check_code == 0:
-        return redirect(url_for('error_signin', error_message="wrong_account_or_pwd"))
     elif member_check_code == -1:
-        return redirect(url_for('error_signin', error_message="empty_input"))
+        return redirect(url_for('error_signin', err_msg="請輸入帳號、密碼"))
+    else:
+        return redirect(url_for('error_signin', err_msg="帳號或密碼錯誤"))
 
 
-@app.route("/member")
+@ app.route("/member")
 def app_run():
     if 'username' in session:
-        # {"message": "恭喜您，成功登入系統 🙂"}, 200
-        return app.send_static_file('member.html')
+        return app.send_static_file('member.html'), 200
     return redirect(url_for('index'))
 
 
-@app.route("/error/<error_message>")
-def error_signin(error_message):
-    if error_message == "wrong_account_or_pwd":
-        # jsonify({"message": "帳號或密碼錯誤，請重新輸入"}), 401
-        return app.send_static_file('login-fail.html')
-    elif error_message == "empty_input":
-        # jsonify({"message": "帳號、或密碼輸入錯誤"}), 401
-        return app.send_static_file('login-empty.html')
+@ app.route("/error/")
+def error_signin():  # status code: 401 Unauthorized
+    error_message = request.args.get('err_msg')
+    if error_message == "請輸入帳號、密碼":
+        return app.send_static_file('login-error.html'), 400
+    elif error_message == "帳號或密碼錯誤":
+        return app.send_static_file('login-error.html'), 401
 
 
-@app.route("/signout", methods=["GET"])
+@ app.route("/signout", methods=["GET"])
 def signout():
     session.pop('username', None)
     return redirect(url_for('index'))
