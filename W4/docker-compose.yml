@@ -8,7 +8,8 @@ services:
         expose:
             - ${FLASK_PORT}
         environment:
-          FLASK_PORT: ${FLASK_PORT}
+            FLASK_PORT: ${FLASK_PORT}
+        restart: always
         volumes:
             - "./server/:/app/server"
             - "./server/client/:/app/client"
@@ -18,9 +19,10 @@ services:
             context: ./server
             dockerfile: dockerfile-nginx
         environment:
-          FLASK_PORT: ${FLASK_PORT}
-          NGINX_EXPOSE_PORT: ${NGINX_EXPOSE_PORT}
+            FLASK_PORT: ${FLASK_PORT}
+            NGINX_EXPOSE_PORT: ${NGINX_EXPOSE_PORT}
         ports:
             - ${FLASK_PORT}:${NGINX_EXPOSE_PORT}
+        restart: always
         depends_on:
             - flask
