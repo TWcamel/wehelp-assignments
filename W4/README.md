@@ -9,10 +9,10 @@
 ## How to use
 
 1.  clone this project
-2.  cd W4
-3.  mv client ./server ( suffer COPY constrains in Docker )
+2.  `cd W4`
+3.  `mv client ./server` ( suffer COPY constrains in Docker )
 4.  make sure your local machine have [dependencies](#dependencies) installed
-4.  make start
+4.  `make start`
 
 ### Dependencies
 
