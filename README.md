@@ -4,7 +4,7 @@
 
 -   開發方式採用前後端分離
 -   會員驗證方式使用 session
--   使用 Docker 開發，並支援 hot reload，若第一次 clone 此 project，請看 [這裡](#docker) 來使用 docker container
+-   使用 Docker 開發，並支援 hot reload，若第一次 clone 此 project，請看 [這裡](#How to use) 來使用 docker container
 
 ## How to use
 
