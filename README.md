@@ -19,8 +19,9 @@
 
 # How to use
 1.  clone this repo
-2.  copy `.env.exampe` and edit it
-3.  ` docker compose-up `
+2.  `mv .env.exampe .env`
+3.  edit `.env`
+4.  ` docker compose-up `
 
 # Assignments
 ## REQ3: SQL CRUD
