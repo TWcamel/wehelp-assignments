@@ -19,7 +19,8 @@
 
 # How to use
 1.  clone this repo
-2.  copy `.env.exampe` and edit it
+2.  `mv .env.exampe .env`
+3.  edit `.env`
 3.  ` docker compose-up `
 
 # Assignments
@@ -79,7 +80,9 @@
 
 ### 使用 SELECT 搭配 JOIN 語法，取得所有留言，結果須包含留言者會員的姓名
 
--   ![picture 15](images/6a1f9d552455dbf1c5940aebe15be69018d09472c08833aae549e1b68865604d.png)
+- ![picture 17](../images/6a7c4cedaa1dfd7db1c78bb22639a9408e2411030d78d67603a828a6b621464d.png)  
+
+
 
 ### 使用 SELECT 搭配 JOIN 語法，取得 member 資料表中欄位 username 是 test 的所有留言，資料中須包含留言者會員的姓名。
 
