@@ -80,7 +80,7 @@
 
 ### 使用 SELECT 搭配 JOIN 語法，取得所有留言，結果須包含留言者會員的姓名
 
-- ![picture 17](../images/6a7c4cedaa1dfd7db1c78bb22639a9408e2411030d78d67603a828a6b621464d.png)  
+- ![picture 17](images/6a7c4cedaa1dfd7db1c78bb22639a9408e2411030d78d67603a828a6b621464d.png)  
 
 
 
