@@ -80,7 +80,7 @@
 
 ### 使用 SELECT 搭配 JOIN 語法，取得所有留言，結果須包含留言者會員的姓名
 
--   ![picture 15](images/6a1f9d552455dbf1c5940aebe15be69018d09472c08833aae549e1b68865604d.png)
+-   ![picture 18](images/931fab06d8720ba11dc3b59ab4751cba84b2e1212b1628e6980ae7307bc99409.png)
 
 ### 使用 SELECT 搭配 JOIN 語法，取得 member 資料表中欄位 username 是 test 的所有留言，資料中須包含留言者會員的姓名。
 
