@@ -42,7 +42,7 @@
 
 ### 使用 SELECT 指令取得 member 資料表中第 2 ~ 4 共三筆資料，並按照 time 欄位，由近到遠排序
 
--   ![picture 19](images/2f47cb06d26a2524bf12ac1c95dd96702d1b456cee062c55b79558ac0ab4a183.png)
+-   ![picture 19](../images/1df6a21ce60622ebc6b6c8ed8717878f47dca32a4cb91452219d8750141323f8.png)
 
 ### 使用 SELECT 指令取得欄位 username 是 test 的會員資料
 
