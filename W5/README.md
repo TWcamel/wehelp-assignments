@@ -22,6 +22,7 @@
 2.  `mv .env.exampe .env`
 3.  edit `.env`
 3.  ` docker compose-up `
+4.  `mysql -u ${your_user_name} -p website < website.sql`
 
 # Assignments
 ## REQ3: SQL CRUD
@@ -41,7 +42,7 @@
 
 ### 使用 SELECT 指令取得 member 資料表中第 2 ~ 4 共三筆資料，並按照 time 欄位，由近到遠排序
 
--   ![picture 5](images/e650755657c1265945033cd7957188dadb9c98637fbaebdc39099e212ebc3f89.png)
+-   ![picture 19](images/2f47cb06d26a2524bf12ac1c95dd96702d1b456cee062c55b79558ac0ab4a183.png)
 
 ### 使用 SELECT 指令取得欄位 username 是 test 的會員資料
 
@@ -80,9 +81,7 @@
 
 ### 使用 SELECT 搭配 JOIN 語法，取得所有留言，結果須包含留言者會員的姓名
 
-- ![picture 17](images/6a7c4cedaa1dfd7db1c78bb22639a9408e2411030d78d67603a828a6b621464d.png)  
-
-
+-   ![picture 17](images/6a7c4cedaa1dfd7db1c78bb22639a9408e2411030d78d67603a828a6b621464d.png)
 
 ### 使用 SELECT 搭配 JOIN 語法，取得 member 資料表中欄位 username 是 test 的所有留言，資料中須包含留言者會員的姓名。
 
