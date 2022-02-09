@@ -1,0 +1,53 @@
+version: '3.9'
+services:
+    db:
+        restart: always
+        image: mysql
+        environment:
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_ROOT_HOST: ${MYSQL_ROOT_HOST}
+        ports:
+            - ${MSQL_PORT}:${MSQL_PORT}
+        volumes:
+            - MYSQL_DATA_DIR:/var/lib/mysql
+        expose:
+            - ${MSQL_PORT}
+        networks:
+            - ${WEBAPP_NETWORK_NAME}
+    flask:
+        image: webapp-flask
+        build:
+            context: ./server
+            dockerfile: dockerfile-flask
+        environment:
+            FLASK_PORT: ${FLASK_PORT}
+        restart: always
+        volumes:
+            - "./server/:/app/server"
+            - "./server/client/:/app/client"
+        networks:
+            - ${WEBAPP_NETWORK_NAME}
+    nginx:
+        image: webapp-nginx
+        build:
+            context: ./server
+            dockerfile: dockerfile-nginx
+        environment:
+            FLASK_PORT: ${FLASK_PORT}
+            NGINX_EXPOSE_PORT: ${NGINX_EXPOSE_PORT}
+        ports:
+            - ${FLASK_PORT}:${NGINX_EXPOSE_PORT}
+        restart: always
+        depends_on:
+            - flask
+        networks:
+            - ${WEBAPP_NETWORK_NAME}
+
+volumes:
+    MYSQL_DATA_DIR:
+
+networks:
+    web-app-network:
