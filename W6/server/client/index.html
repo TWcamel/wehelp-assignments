@@ -10,6 +10,37 @@
 	<nav class="nav-bar"><h3>歡迎光臨，請輸入帳號密碼</h3></nav>
 	<body>
 		<div class="main-page">
+			<div class="signup-form">
+				<h3>註冊帳號</h3>
+				<form id="user-signup-form" method="post" action="/signup">
+					<label for="name">姓名</label>
+					<input
+						class="signup-input-text"
+						type="text"
+						id="name"
+						name="name"
+						placeholder="Your Name"
+					/><br />
+					<label for="account">帳號</label>
+					<input
+						class="signup-input-text"
+						type="text"
+						id="account"
+						name="account"
+						placeholder="Account"
+					/><br />
+					<label for="pwd">密碼</label>
+					<input
+						class="signup-input-text"
+						type="text"
+						id="pwd"
+						name="pwd"
+						placeholder="Password"
+					/><br /><br />
+				</form>
+				<button class="signup-btn" type="submit" form="user-signup-form">登入</button>
+			</div>
+			<hr>
 			<div class="login-form">
 				<h3>登入系統</h3>
 				<form id="user-login-form" method="post" action="/signin">

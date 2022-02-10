@@ -2,3 +2,4 @@ __pycache__
 WH6.pdf
 db.py
 .env
+.prettierrc

@@ -1,9 +1,9 @@
 import db.db as db
-import os
-from controller.home import web_app
+from controllers.home import web_app
+from controllers.member import web_app_member
+from controllers.error import web_app_error
 from flask import Flask
 from time import time
-
 
 app = Flask(
     __name__,
@@ -13,8 +13,8 @@ app = Flask(
 
 app.secret_key = str(time())
 app.register_blueprint(web_app)
-
-db.run_db()
+app.register_blueprint(web_app_member)
+app.register_blueprint(web_app_error)
 
 if __name__ == "__main__":
     app.run(debug=True, port=int("3000"), host='0.0.0.0')
