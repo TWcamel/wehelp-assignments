@@ -13,6 +13,28 @@ def get_all_member():
     return res
 
 
+def get_member(account, password):
+    db.get_connection()
+
+    cursor = db.get_cursor()
+
+    sql_cmd = '''
+        SELECT name, username, password  
+        FROM member 
+        WHERE username=%(username)s and password=%(password)s;
+    '''
+    sql_content = {
+        "username": account,
+        "password": password
+    }
+    cursor.execute(sql_cmd, sql_content)
+    res = cursor.fetchone()
+
+    db.close_cursor()
+    db.close_connection()
+    return res
+
+
 def check_and_add_membership(name, account, password):
     db.get_connection()
     cursor = db.get_cursor()
@@ -23,7 +45,7 @@ def check_and_add_membership(name, account, password):
         WHERE username=%(username)s;
     '''
     sql_content = {
-        "username": account
+        "username": account,
     }
 
     cursor.execute(sql_cmd, sql_content)
@@ -62,5 +84,3 @@ def add_membership(name, account, password):
         db.close_connection()
 
     print("Successfully insert values %s, %s, %s", name, account, password)
-
-    return affected_count
