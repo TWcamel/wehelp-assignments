@@ -6,7 +6,7 @@
 -   請看 [這裡](#how-to-use) 來使用 containerized docker application
 -   開發方式採用前後端分離
 -   會員驗證方式使用 session
--   測試影片： [Week4 流程測試 - with Docker ( Flask/Nginx/Hot reload ) By 黃上科 Samuel](https://youtu.be/eV6get0Nw_M)
+-   測試影片： [Week6 流程測試 - with Docker ( Flask/Nginx/Mysql ) By 黃上科 Samuel](https://youtu.be/Ai6qSLp1mY0)
 
 ## How to use
 
