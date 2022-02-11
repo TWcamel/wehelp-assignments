@@ -10,9 +10,7 @@ CONFIG = {
     'raise_on_warnings': True
 }
 
-
 def get_connection():
-    global cnx
     try:
         cnx = mysql.connector.connect(**CONFIG)
     except mysql.connector.Error as err:
@@ -22,42 +20,50 @@ def get_connection():
             print("Database does not exist")
         else:
             print(err)
+    return cnx
 
 
-def close_connection():
+def db_fetch_all(sql_cmd):
+    cnx = get_connection()
+    cursor = cnx.cursor()
     try:
+        cursor.execute(sql_cmd)
+        print("Database query successfully")
+    except Exception as err:
+        print("Failed to query database")
+    finally:
+        res = cursor.fetchall()
+        cursor.close()
         cnx.close()
-    except Exception as err:
-        print(err)
+    return res
 
 
-def check_connection():
-    if cnx.is_closed():
-        return print("Flask is disconnect to MySql")
-    else:
-        return print("Flask is connect to MySql")
-
-
-def get_cursor():
+def db_fetch_one(sql_cmd, sql_content):
+    cnx = get_connection()
+    cursor = cnx.cursor()
     try:
-        return cnx.cursor()
+        cursor.execute(sql_cmd, sql_content)
+        print("Database query successfully")
     except Exception as err:
-        print(err)
+        print("Failed to query database")
+    finally:
+        res = cursor.fetchone()
+        cursor.close()
+        cnx.close()
+    return res
 
 
-def close_cursor():
+def db_crud(sql_cmd, sql_content):
+    cnx = get_connection()
+    cursor = cnx.cursor()
     try:
-        cnx.cursor().close()
+        cursor.execute(sql_cmd, sql_content)
     except Exception as err:
-        print(err)
-
-
-def commit():
-    try:
+        print("Failed to do CRUD operation")
+        return False
+    finally:
         cnx.commit()
-    except Exception as err:
-        print(err)
-
-if __name__ == "__main__":
-    get_connection()
+        cursor.close()
+        cnx.close()
+    return True
 
