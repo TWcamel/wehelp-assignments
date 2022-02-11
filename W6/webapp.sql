@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.27, for Linux (x86_64)
 --
--- Host: localhost    Database: website
+-- Host: localhost    Database: db
 -- ------------------------------------------------------
 -- Server version	8.0.27
 
@@ -30,7 +30,7 @@ CREATE TABLE `member` (
   `follower_count` int NOT NULL DEFAULT '0',
   `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'test2','test','test',0,'2022-01-23 18:28:19'),(2,'test2','test','test',0,'2022-01-23 18:28:19'),(3,'test2','test','test',0,'2022-01-23 18:28:19'),(4,'test2','test','test',0,'2022-01-23 18:28:19');
+INSERT INTO `member` VALUES (1,'test','test','test',22,'2022-02-09 19:11:48'),(6,'aws','test1','aws',0,'2022-02-10 19:26:48'),(7,'aws','aws','aws',0,'2022-02-10 19:33:16'),(8,'gcp','gcp','gcp',0,'2022-02-10 19:35:02'),(9,'k8s','k8s','k8s',0,'2022-02-10 19:36:42'),(10,'^_^',':)','haha',0,'2022-02-10 21:34:50'),(11,'azure','azure','azure',0,'2022-02-11 18:28:14'),(12,'d^_^b','123','123',0,'2022-02-11 18:34:12'),(13,'d','','',0,'2022-02-11 18:35:52'),(14,'d','2','',0,'2022-02-11 18:49:36'),(15,'s','d','',0,'2022-02-11 18:52:14'),(16,'','f','',0,'2022-02-11 18:53:34'),(17,'dd','dd','dd',0,'2022-02-11 19:00:08'),(18,'ff','ff','ff',0,'2022-02-11 19:03:35'),(19,'^_^bb','bb','bb',0,'2022-02-11 19:07:19');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +58,7 @@ CREATE TABLE `message` (
   PRIMARY KEY (`id`),
   KEY `member_id` (`member_id`),
   CONSTRAINT `message_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,6 @@ CREATE TABLE `message` (
 
 LOCK TABLES `message` WRITE;
 /*!40000 ALTER TABLE `message` DISABLE KEYS */;
-INSERT INTO `message` VALUES (1,2,'HI this is a message to id 2 from message TBL','2022-01-23 18:48:07'),(2,3,'HI this is a message to id 3 from message TBL','2022-01-23 18:53:44');
 /*!40000 ALTER TABLE `message` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -80,4 +79,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-01-23 19:25:59
+-- Dump completed on 2022-02-11 19:26:50
