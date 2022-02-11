@@ -2,21 +2,10 @@ import db.db as db
 
 
 def get_all_member():
-    db.get_connection()
-
-    cursor = db.get_cursor()
-    cursor.execute("SELECT name, username, password FROM member")
-    res = cursor.fetchall()
-
-    db.close_cursor()
-    db.close_connection()
-    return res
+    return db.db_fetch_all(sql_cmd="SELECT name, username, password FROM member")
 
 
 def get_member(account, password):
-    db.get_connection()
-
-    cursor = db.get_cursor()
 
     sql_cmd = '''
         SELECT name, username, password  
@@ -27,17 +16,11 @@ def get_member(account, password):
         "username": account,
         "password": password
     }
-    cursor.execute(sql_cmd, sql_content)
-    res = cursor.fetchone()
 
-    db.close_cursor()
-    db.close_connection()
-    return res
+    return db.db_fetch_one(sql_cmd, sql_content)
 
 
 def check_and_add_membership(name, account, password):
-    db.get_connection()
-    cursor = db.get_cursor()
 
     sql_cmd = '''
         SELECT name, username, password  
@@ -48,21 +31,16 @@ def check_and_add_membership(name, account, password):
         "username": account,
     }
 
-    cursor.execute(sql_cmd, sql_content)
-    res = cursor.fetchone()
+    res = db.db_fetch_one(sql_cmd, sql_content)
 
     if res is None:
         add_membership(name, account, password)
         return False
 
-    db.close_cursor()
-    db.close_connection()
     return res
 
 
 def add_membership(name, account, password):
-    db.get_connection()
-    cursor = db.get_cursor()
 
     sql_cmd = '''
         INSERT INTO member (name, username, password) 
@@ -74,13 +52,5 @@ def add_membership(name, account, password):
         "password": password
     }
 
-    try:
-        cursor.execute(sql_cmd, sql_content)
-    except Exception as err:
-        print("Failed to insert values %s, %s, %s", name, account, password)
-    finally:
-        db.commit()
-        db.close_cursor()
-        db.close_connection()
-
-    print("Successfully insert values %s, %s, %s", name, account, password)
+    if db.db_crud(sql_cmd, sql_content):
+        print("Successfully add membership", name, account, password)

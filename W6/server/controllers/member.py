@@ -36,13 +36,17 @@ def sign_in():
 @web_app_member.route('/signup', methods=["POST"])
 def signup():
     form = request.form.to_dict(flat=False)
-    res = mb.check_and_add_membership(
-        form["name"][0], form["account"][0], form["pwd"][0]
-    )
-    if res:
+
+    for key, value in form.items():
+        if len(value[0].strip()) == 0:
+            msg = f"{key} 欄位不可為空，請重新輸入"
+            return redirect(f"/error/?err_msg={msg}")
+
+    if mb.check_and_add_membership(form["name"][0], form["account"][0], form["pwd"][0]):
         msg = "帳號已經被註冊"
         session["user_status"] = "未登入"
         return redirect(f"/error/?err_msg={msg}")
+
     return redirect("/")
 
 
