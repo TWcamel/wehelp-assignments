@@ -20,6 +20,7 @@
 
 ### TODOs
 
+-   [ ] understand event loop
 -   [ ] async await with flask
 -   [ ] mysql with connection pool
 -   [ ] mysql with replicaset
@@ -29,7 +30,7 @@
 ## How to use
 
 1.  clone this project
-2.  `cd W6`
+2.  `cd W7`
 3.  `mv client ./server` ( suffer COPY constrains in Docker )
 4.  edit `./server/db/db.example.py` and `./env.example` and set environment variables
 5.  make sure your local machine has [dependencies](#dependencies)
