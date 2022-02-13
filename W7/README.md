@@ -1,3 +1,13 @@
+- [宗旨](#宗旨)
+	- [About](#about)
+		- [TODOs](#todos)
+	- [How to use](#how-to-use)
+		- [Dependencies](#dependencies)
+	- [Ref](#ref)
+	- [搞死人的 flask-mysql with docker](#搞死人的-flask-mysql-with-docker)
+
+<hr>
+
 # 宗旨
 
 ## About
@@ -7,6 +17,14 @@
 -   開發方式採用前後端分離
 -   會員驗證方式使用 session
 -   測試影片： [Week6 流程測試 - with Docker ( Flask/Nginx/Mysql ) By 黃上科 Samuel](https://youtu.be/Ai6qSLp1mY0)
+
+### TODOs
+
+-   [ ] async await with flask
+-   [ ] mysql with connection pool
+-   [ ] mysql with replicaset
+-   [ ] backend first
+-   [ ] frontend page
 
 ## How to use
 
