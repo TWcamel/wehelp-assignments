@@ -13,5 +13,21 @@
 			<h4>{{ user }} 恭喜您，成功登入系統 🙂</h4>
 			<input type="button" value="登出" onclick="location.href='../signout'">
 		</div>
+		<div class="query-membership-form">
+			<h3>查詢會員姓名</h3>
+			<form id="member-query-membership-form" method="get" action="/api/members">
+				<input
+					class="query-membership-input-text"
+					type="text"
+					id="username"
+					name="username"
+					placeholder="Your username here"
+				/>
+			</form><br/>
+			<button class="login-btn" type="submit" form="member-query-membership-form">查詢</button>
+			<div class="query-membership-msg"> </div>
+		</div>
+		</div>
+	<script src="./js/memberHelper.js"> </script>
 	</body>
 </html>

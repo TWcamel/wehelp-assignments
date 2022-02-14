@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, request, abort, session
 from jinja2 import TemplateNotFound
 import model.member as mb
+import util.json_response as js
 
 web_app_member = Blueprint("web-app-member", __name__,
                            template_folder="../client")
@@ -55,3 +56,52 @@ def sign_out():
     session["user_status"] = "未登入"
     session.pop("user", None)
     return redirect("/")
+
+
+@web_app_member.route('/api/members', methods=["GET"])
+@js.json_response
+def get_member_info():
+    path_param = request.args.to_dict(flat=False)
+
+    res = None
+
+    if 'username' in path_param:
+        _data = mb.query_membership(next(iter(path_param["username"])))
+
+        if _data:
+            (id, name, username) = _data
+            res = {
+                "id": id,
+                "name": name,
+                "username": username
+            }
+
+    return {"data": res}
+
+
+@web_app_member.route('/api/member', methods=["POST"])
+def update_member_name():
+    header_content_type = request.headers.get("Content-Type", None)
+
+    # TODO: client side redering error page
+    if header_content_type != "application/json":
+        msg = "請確認 Content-Type 是 application/json"
+        session["user_status"] = "未登入"
+        return redirect(f"/error/?err_msg={msg}")
+
+    body_info = request.get_json()
+
+    # TODO: client side redering error page
+    if "name" not in body_info:
+        msg = "請確認 name 欄位是否有正確輸入"
+        return redirect(f"/error/?err_msg={msg}")
+
+    # TODO: check membership before update
+    affected_rows = mb.update_membership_name(body_info['name'], 'test')
+
+    res_key = "error"
+
+    if affected_rows > 0:
+        res_key = "ok"
+
+    return {res_key: True}

@@ -32,18 +32,18 @@ body {
 	text-align: center;
 }
 
-.login-form, .signup-form {
+.login-form, .signup-form, .query-membership-form {
 	display: block;
 	text-align: center;
 	padding-top: var(--block-gap-size);
 	padding-bottom: var(--block-gap-size);
 }
 
-.login-btn, .signup-btn {
+.login-btn, .signup-btn  {
 	border-radius: var(--border-radius);
 }
 
-.login-input-text, .signup-input-text {
+.login-input-text, .signup-input-text, .query-membership-input-text {
 	height: var(--input-text-size);
 	margin: var(--border-radius);
 	border-radius: var(--border-radius) ;
