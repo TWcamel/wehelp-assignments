@@ -1,6 +1,4 @@
 import mysql.connector
-from mysql.connector import errorcode
-
 
 CONFIG = {
     'user': 'scott',
@@ -10,60 +8,57 @@ CONFIG = {
     'raise_on_warnings': True
 }
 
-def get_connection():
-    try:
-        cnx = mysql.connector.connect(**CONFIG)
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with your user name or password")
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist")
-        else:
-            print(err)
-    return cnx
 
+class DB:
+    def __init__(self):
+        """Connect to database
 
-def db_fetch_all(sql_cmd):
-    cnx = get_connection()
-    cursor = cnx.cursor()
-    try:
-        cursor.execute(sql_cmd)
-        print("Database query successfully")
-    except Exception as err:
-        print("Failed to query database")
-    finally:
-        res = cursor.fetchall()
-        cursor.close()
-        cnx.close()
-    return res
+        Raises:
+            mysql.connector.Error: Failed to connect to database
 
+        """
+        self._cnx = mysql.connector.connect(**CONFIG)
+        self._cursor = self._cnx.cursor()
 
-def db_fetch_one(sql_cmd, sql_content):
-    cnx = get_connection()
-    cursor = cnx.cursor()
-    try:
-        cursor.execute(sql_cmd, sql_content)
-        print("Database query successfully")
-    except Exception as err:
-        print("Failed to query database")
-    finally:
-        res = cursor.fetchone()
-        cursor.close()
-        cnx.close()
-    return res
+    def __enter__(self):
+        return self
 
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Close database connection
 
-def db_crud(sql_cmd, sql_content):
-    cnx = get_connection()
-    cursor = cnx.cursor()
-    try:
-        cursor.execute(sql_cmd, sql_content)
-    except Exception as err:
-        print("Failed to do CRUD operation")
-        return False
-    finally:
-        cnx.commit()
-        cursor.close()
-        cnx.close()
-    return True
+        Args:
+            exc_type (type): Exception type
+            exc_val (object): Exception value
+            exc_tb (traceback): Exception traceback
+        """
+        self._cursor.close()
+        self._cnx.close()
 
+    def fetch_db(self, sql_cmd: str, params: dict = None, is_fetch_one: bool = True) -> list:
+        """Database query operation
+
+        Args:
+            sql_cmd (str): SQL command
+            params (dict): Parameters
+            is_fetch_one (bool): Whether to fetch one or all (default: True)
+
+        Returns:
+            list: Result
+        """
+        self._cursor.execute(sql_cmd, params)
+        return [self._cursor.fetchone()] if is_fetch_one is True else self._cursor.fetchall()
+
+    def crud(self, sql_cmd, params=None) -> int:
+        """CRUD operation
+
+        Args:
+            sql_cmd (str): SQL command
+            params (dict): Parameters
+
+        Returns:
+            int: Affected rows
+        """
+        self._cursor.execute(sql_cmd, params)
+        affected_rows = self._cursor.rowcount
+        self._cnx.commit()
+        return affected_rows

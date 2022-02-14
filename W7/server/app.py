@@ -1,4 +1,3 @@
-import db.db as db
 from controllers.home import web_app
 from controllers.member import web_app_member
 from controllers.error import web_app_error

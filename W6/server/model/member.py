@@ -1,11 +1,14 @@
 import db.db as db
 
 
-def get_all_member():
-    return db.db_fetch_all(sql_cmd="SELECT name, username, password FROM member")
+def get_all_member() -> list:
+    with db.DB() as _db:
+        sql_cmd = "SELECT name, username, password FROM member"
+        res = _db.fetch_db(sql_cmd=sql_cmd, is_fetch_one=False)
+    return res
 
 
-def get_member(account, password):
+def get_member(account, password) -> tuple:
 
     sql_cmd = '''
         SELECT name, username, password  
@@ -17,10 +20,12 @@ def get_member(account, password):
         "password": password
     }
 
-    return db.db_fetch_one(sql_cmd, sql_content)
+    with db.DB() as _db:
+        res = _db.fetch_db(sql_cmd, sql_content)
+    return tuple(next(iter(res)))
 
 
-def check_and_add_membership(name, account, password):
+def check_and_add_membership(name, account, password) -> bool:
 
     sql_cmd = '''
         SELECT name, username, password  
@@ -31,13 +36,14 @@ def check_and_add_membership(name, account, password):
         "username": account,
     }
 
-    res = db.db_fetch_one(sql_cmd, sql_content)
+    with db.DB() as _db:
+        res = _db.fetch_db(sql_cmd, sql_content)
 
-    if res is None:
+    if next(iter(res)) is None:
         add_membership(name, account, password)
         return False
 
-    return res
+    return True
 
 
 def add_membership(name, account, password):
@@ -52,5 +58,10 @@ def add_membership(name, account, password):
         "password": password
     }
 
-    if db.db_crud(sql_cmd, sql_content):
-        print("Successfully add membership", name, account, password)
+    with db.DB() as _db:
+        affected_rows = _db.crud(sql_cmd, sql_content)
+
+        if affected_rows > 0:
+            print(
+                f"Successfully add {affected_rows} membership", name, account, password)
+
