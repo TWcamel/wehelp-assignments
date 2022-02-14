@@ -65,7 +65,7 @@ def get_member_info():
 
     res = None
 
-    if 'username' in path_param:
+    if 'username' in path_param and 'user' in session and session.get("user_status", "未登入") == "已登入":
         _data = mb.query_membership(next(iter(path_param["username"])))
 
         if _data:
