@@ -26,6 +26,6 @@ let memberHelper = (() => {
 
     pushMemberMsg = (element, msg) => {
         const dom = document.querySelector(`.${element}`);
-        dom.innerText = msg === null ? null : `${msg.name} 🐒`;
+        dom.innerText = msg === null ? null : `${msg.name} `;
     };
 })();

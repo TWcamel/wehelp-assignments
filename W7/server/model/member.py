@@ -1,10 +1,13 @@
 import db.db as db
+import asyncio
 
 
 def get_all_member() -> list:
     with db.DB() as _db:
         sql_cmd = "SELECT name, username, password FROM member"
         res = _db.fetch_db(sql_cmd=sql_cmd, is_fetch_one=False)
+        res = asyncio.gather(res, return_exceptions=True)
+
     return res
 
 

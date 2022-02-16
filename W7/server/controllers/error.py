@@ -10,6 +10,7 @@ web_app_error = Blueprint("web_app_error", __name__,
 def error(page):
     error_message = request.args.get('err_msg')
     try:
+		# TODO: make it response status code and client side rendering
         return render_template(f'{page}.html', err_nsg=error_message)
     except TemplateNotFound:
         abort(404)

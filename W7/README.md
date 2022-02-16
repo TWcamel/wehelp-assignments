@@ -20,12 +20,12 @@
 
 ### TODOs
 
--   [ ] understand event loop
--   [ ] async await with flask
--   [ ] mysql with connection pool
+-   [x] understand event loop
+-   [ ] async await with asyncio
+-   [x] mysql with connection pool
 -   [ ] mysql with replicaset
--   [ ] backend first
--   [ ] frontend page
+-   [x] backend
+-   [x] frontend page
 
 ## How to use
 
