@@ -1,11 +1,12 @@
 import mysql.connector
 
 CONFIG = {
-    'user': 'scott',
+    'user': 'sam',
     'password': 'password',
     'host': 'db',
     'database': 'your_db',
-    'raise_on_warnings': True
+    'raise_on_warnings': True,
+    'pool_name': 'your_db_pool'
 }
 
 
