@@ -105,7 +105,6 @@ def update_member_name():
             msg = "請確認 name 欄位是否有正確輸入"
             return redirect(f"/error/?err_msg={msg}")
 
-        # TODO: check membership before update
         affected_rows = mb.update_membership_name(
             body_info['name'], session['username'])
 
