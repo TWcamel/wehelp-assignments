@@ -12,7 +12,7 @@ loop = asyncio.get_event_loop()
 
 @web_app_member.route('/member', defaults={'page': 'member'})
 def member(page):
-    if 'user' in session and session.get("user_status", "未登入") == "已登入":
+    if 'username' in session and session.get("user_status", "未登入") == "已登入":
         try:
             return render_template(f'{page}.html', user=session['user'])
         except TemplateNotFound:
@@ -33,6 +33,7 @@ def sign_in():
 
     session["user_status"] = "已登入"
     session["user"] = res[0]
+    session["username"] = res[1]
 
     return redirect("/member")
 
@@ -87,25 +88,28 @@ def get_member_info():
 def update_member_name():
     header_content_type = request.headers.get("Content-Type", None)
 
-    # TODO: client side redering error page
-    if header_content_type != "application/json":
-        msg = "請確認 Content-Type 是 application/json"
-        session["user_status"] = "未登入"
-        return redirect(f"/error/?err_msg={msg}")
-
-    body_info = request.get_json()
-
-    # TODO: client side redering error page
-    if "name" not in body_info:
-        msg = "請確認 name 欄位是否有正確輸入"
-        return redirect(f"/error/?err_msg={msg}")
-
-    # TODO: check membership before update
-    affected_rows = mb.update_membership_name(body_info['name'], 'test')
-
     res_key = "error"
 
-    if affected_rows > 0:
-        res_key = "ok"
+    if 'username' in session and session.get("user_status", "未登入") == "已登入":
+
+        # TODO: client side redering error page
+        if header_content_type != "application/json":
+            msg = "請確認 Content-Type 是 application/json"
+            session["user_status"] = "未登入"
+            return redirect(f"/error/?err_msg={msg}")
+
+        body_info = request.get_json()
+
+        # TODO: client side redering error page
+        if "name" not in body_info:
+            msg = "請確認 name 欄位是否有正確輸入"
+            return redirect(f"/error/?err_msg={msg}")
+
+        # TODO: check membership before update
+        affected_rows = mb.update_membership_name(
+            body_info['name'], session['username'])
+
+        if affected_rows > 0:
+            res_key = "ok"
 
     return {res_key: True}
