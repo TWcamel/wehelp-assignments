@@ -5,7 +5,9 @@ CONFIG = {
     'password': 'password',
     'host': 'db',
     'database': 'your_db',
-    'raise_on_warnings': True
+    'raise_on_warnings': True,
+    'pool_size': 5,  # maximum -> pooling.CNX_POOL_MAXSIZE
+    'pool_name': 'your_db_pool'
 }
 
 
