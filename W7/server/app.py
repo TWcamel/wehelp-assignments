@@ -3,7 +3,6 @@ from controllers.member import web_app_member
 from controllers.error import web_app_error
 from flask import Flask
 from time import time
-import asyncio
 
 app = Flask(
     __name__,

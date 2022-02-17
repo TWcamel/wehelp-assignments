@@ -109,36 +109,3 @@ def update_member_name():
         res_key = "ok"
 
     return {res_key: True}
-
-
-@web_app_member.route('/test', methods=["GET"])
-async def test():
-    """ asyncio function test  
-
-    Estimate elapse time for each function call with async:
-
-    1.coroutine
-    2.task
-    3.event loop
-
-    """
-    start = time.perf_counter()
-
-    tasks = [dosomething(i) for i in range(5)]
-    tasks1 = [raise_error(i) for i in range(5)]
-    results = await asyncio.gather(tasks, *tasks1, return_exceptions=True)
-
-    return {"elasped": time.perf_counter()-start}
-
-
-async def dosomething(num):
-    print('第 {} 任務，第一步'.format(num))
-    await asyncio.sleep(1)
-    print('第 {} 任務，第二步'.format(num))
-    return '第 {} 任務完成'.format(num)
-
-
-async def raise_error(num):
-    await asyncio.sleep(3)
-    raise ValueError
-    print('這邊不會執行到')
