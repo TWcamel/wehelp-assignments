@@ -63,7 +63,7 @@ def sign_out():
 
 
 @web_app_member.route('/api/members', methods=["GET"])
-@js.json_response
+@js.json_response_with_cors
 def get_member_info():
     path_param = request.args.to_dict(flat=False)
 
@@ -84,7 +84,7 @@ def get_member_info():
 
 
 @web_app_member.route('/api/member', methods=["POST"])
-@js.json_response
+@js.json_response_with_cors
 def update_member_name():
     header_content_type = request.headers.get("Content-Type", None)
 

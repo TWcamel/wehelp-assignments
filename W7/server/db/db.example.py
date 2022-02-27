@@ -5,6 +5,7 @@ CONFIG = {
     'password': 'password',
     'host': 'db',
     'database': 'your_db',
+    'port': '3306',
     'raise_on_warnings': True
 }
 
@@ -17,7 +18,10 @@ class DB:
             mysql.connector.Error: Failed to connect to database
 
         """
-        self._cnx = mysql.connector.connect(**CONFIG)
+        self._cnx = mysql.connector.connect(
+            pool_size=5,  # maximum -> pooling.CNX_POOL_MAXSIZE
+            pool_name='web_app_db_pool',
+            **CONFIG)
         self._cursor = self._cnx.cursor()
 
     def __enter__(self):

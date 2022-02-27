@@ -36,7 +36,7 @@
 ### TODOs
 
 -   [ ] mysql with [replicaset](#ref)
--   [ ] mysql with [connection pool](#ref)
+-   [x] mysql with [connection pool](#ref)
 -   [ ] make my API is [CORS able](#ref)
 
 ## Ref
